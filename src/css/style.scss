@@ -7,8 +7,8 @@
     --color-footer: #DFE6ED;
     --color-border-footer: #9EADBA;
     --color-border-input: #D4D4D4;
-    --height-footer: 6vh;
-    --max-width: 600px;
+    --height-header: 6vh;
+    --height-footer: 105px;
 }
 
 body {
@@ -23,12 +23,11 @@ body {
 
 header {
     width: 100vw;
-    max-width: var(--max-width);
     background-color: var(--color-header);
     color: var(--color-text-header-and-button);
-    height: var(--height-footer);
+    height: var(--height-header);
     @include flex(center, center);
-
+    font-size: 30px;
     position: fixed;
     top: 0;
     left: 0;
@@ -36,12 +35,18 @@ header {
 }
 
 .main {
-    margin-top: var(--height-footer);
+    margin-top: var(--height-header);
+    margin-bottom: var(--height-footer);
 
     & img {
         width: 129px;
         height: 193px;
         margin: 0 0 20px 10px;
+
+        &:hover {
+            cursor: pointer;
+            box-shadow: 0 0 4px 4px var(--color-text-header-and-button);
+        }
     }
 
     &__movies {
@@ -53,5 +58,63 @@ header {
     & p {
         text-align: center;
         padding: 40px;
+        font-size: 24px;
+        letter-spacing: 4%;
+    }
+
+    &__session-screen {
+
+        & p {
+            text-align: left;
+            margin-left: -20px;
+            font-size: 20px;
+            margin-top: -15px;
+            letter-spacing: 2%;
+        }
+
+        & button {
+            border: none;
+            margin-left: 23px;
+            width: 83px;
+            height: 43px;
+            margin-top: -10px;
+            background-color: var(--color-text-header-and-button);
+            border-radius: 3px;
+            color: white;
+            font-size: 18px;
+            margin-bottom: 15px;
+
+            &:hover {
+                cursor: pointer;
+                box-shadow: 0 0 4px 4px rgba(0,0,0,0.4);
+            }
+        }
+    }
+}
+
+.footer {
+    width: 100vw;
+    background-color: var(--color-footer);
+    color: var(--color-normal-text);
+    height: var(--height-footer);
+    @include flex(center, center);
+    font-size: 26px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    @include flex(flex-start, center);
+
+    & img {
+        width: 48px;
+        height: 72px;
+        margin-top: 14px;
+        margin-bottom: 14px;
+        border: 8px solid white;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    & p {
+        margin-left: -25px;
     }
 }

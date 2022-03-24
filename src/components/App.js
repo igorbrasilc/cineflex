@@ -3,24 +3,21 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import '../css/reset.css';
 import '../css/style.scss';
 
-import Movie from '../assets/movie-test.jpeg';
+import Header from './Header';
+import InitialScreen from './InitialScreen';
+import SessionScreen from './SessionScreen';
+import SeatScreen from './SeatScreen';
 
 function App() {
     return (
-        <>
-        <header>
-            CINEFLEX
-        </header>
-        <main className="main">
-            <p>Selecione o filme</p>
-            <div className="main__movies">
-                <img src={Movie} alt="img-movie"/>
-                <img src={Movie} alt="img-movie"/>
-                <img src={Movie} alt="img-movie"/>
-                <img src={Movie} alt="img-movie"/>
-            </div>
-        </main>
-        </>
+        <BrowserRouter>
+            <Header />
+            <Routes>
+                <Route path="/" element={<InitialScreen />} />
+                <Route path={`/sessions/:idMovie`} element={<SessionScreen />} />
+                <Route path={`/seats/:idSeat`} element={<SeatScreen />} />
+            </Routes>
+        </BrowserRouter>
     )
 }
 

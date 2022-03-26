@@ -18,6 +18,9 @@ function SeatScreen() {
         time: ''
     });
 
+    const [selectedSeats, setSelectedSeats] = useState([]);
+    console.log(selectedSeats);
+
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSession}/seats`);
         promise.then(response => {
@@ -36,13 +39,8 @@ function SeatScreen() {
             <main className="main">
                 <p>Selecione o(s) assento(s)</p>
                 <div className="main__seats">
-                {session.seats.map(seat => { 
-                return (
-                <Span key={seat.id} seat={seat.isAvailable} >
-                    <SeatSelection seat={seat} />
-                </Span>
-                )
-                })}
+                <SeatSelection seats={session.seats} callback={(array) => setSelectedSeats([...array])} 
+                selectedSeats={selectedSeats}/>
                 </div>
                 <SeatLabels />
                 <InputWrapper>
@@ -93,30 +91,6 @@ input {
         box-shadow: 0 0 1px 1px var(--color-text-header-and-button);
     }
 }
-`;
-
-const Span = styled.span`
-padding: 5px;
-background-color: ${props => {
-    if (props.seat === true) return '#C3CFD9'
-    else if (props.seat === false) return '#FBE192';
-}};
-color: black;
-border-radius: 50%;
-border: 1px solid ${props => {
-    if (props.seat === true) return '#808F9D'
-    else if (props.seat === false) return '#F7C52B';
-}
-};
-font-size: 11px;
-letter-spacing: 4%;
-margin-right: 7px;
-margin-bottom: 18px;
-
-    &:hover {
-        cursor: pointer;
-        box-shadow: 0 0 1px 1px var(--color-text-header-and-button);
-    }
 `;
 
 export default SeatScreen;

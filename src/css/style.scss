@@ -203,3 +203,18 @@ header {
     }
     }
 }
+
+.selected {
+    background-color: #8DD7CF;
+    border: 1px solid #1AAE9E;
+}
+
+.unavailable {
+    background-color: #FBE192;
+    border: 1px solid #F7C52B;
+}
+
+.available {
+    background-color: var(--color-header);
+    border: 1px solid #808F9D;
+}

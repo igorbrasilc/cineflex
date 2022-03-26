@@ -18,10 +18,10 @@ export default function InitialScreen() {
         <main className="main">
             <p>Selecione o filme</p>
             <div className="main__movies">
-                {movies.map(movie => {
+                {movies.map((movie, index) => {
                     return (
                     <Link to={`/sessions/${movie.id}`}>       
-                        <img src={movie.posterURL} alt={movie.title} />
+                        <img src={movie.posterURL} alt={movie.title} key={index} />
                     </Link> )
                 })}
             </div>

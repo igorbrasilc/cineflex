@@ -9,6 +9,7 @@ function SessionScreen() {
     const [sessions, setSession] = useState([]);
     const [movie, setMovie] = useState({});
 
+    
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${idMovie}/showtimes`);
         promise.then(response => {
@@ -38,7 +39,7 @@ function SessionScreen() {
                 })}
                 </>
             </div>
-            <footer className="footer">
+            <footer className ="footer">
                 <img src={movie.posterURL} alt={movie.title} />
                 <p>{movie.title}</p>
             </footer>    

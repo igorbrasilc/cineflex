@@ -15,7 +15,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<InitialScreen />} />
                 <Route path={`/sessions/:idMovie`} element={<SessionScreen />} />
-                <Route path={`/seats/:idSeat`} element={<SeatScreen />} />
+                <Route path={`/seats/:idSession`} element={<SeatScreen />} />
             </Routes>
         </BrowserRouter>
     )

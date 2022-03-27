@@ -7,6 +7,7 @@ import Header from './Header';
 import InitialScreen from './InitialScreen';
 import SessionScreen from './SessionScreen';
 import SeatScreen from './SeatScreen';
+import ConfirmationScreen from './ConfirmationScreen';
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                 <Route path="/" element={<InitialScreen />} />
                 <Route path={`/sessions/:idMovie`} element={<SessionScreen />} />
                 <Route path={`/seats/:idSession`} element={<SeatScreen />} />
+                <Route path={`/success`} element={<ConfirmationScreen />} />
             </Routes>
         </BrowserRouter>
     )

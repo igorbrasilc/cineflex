@@ -187,7 +187,7 @@ header {
     @include flex(center, center);
 
     & button {
-        border: none;
+    border: none;
     width: auto;
     background-color: var(--color-text-header-and-button);
     border-radius: 3px;

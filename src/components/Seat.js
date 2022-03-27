@@ -11,10 +11,12 @@ export default function Seat(props) {
 
     function updateSeat() {
         setSelected(!selected);
-        props.callback(props.seat.id, selected);
+        props.callback(props.seat.id, selected, props.seat.name);
     }
 
     return (
-        <p className={css} onClick={() => updateSeat()}>{parseInt(props.seat.name) < 10 ? `0${props.seat.name}` : `${props.seat.name}`}</p>
+        <p className={css} onClick={css === 'unavailable' ? () => alert('Esta poltrona está indisponivel!') : () => updateSeat()}>
+            {parseInt(props.seat.name) < 10 ? `0${props.seat.name}` : `${props.seat.name}`}
+        </p>
     )
 }

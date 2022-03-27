@@ -1,35 +1,41 @@
 import styled from 'styled-components';
-import {useState} from 'react';
 
 import Seat from './Seat';
 
-let array = [];
+let arrayGlobalId = [];
+let arrayLocalId = [];
 
 export default function SeatSelection(props) {
 
-    const {seats, callback} = props;
+    const {seats, callbackGlobal, callbackLocal} = props;
     let countSelected = 0;
 
-    function selectSeat(seatId, state) {
+    function selectSeat(globalId, state, localId) {
 
         if (state === false) {
-            if (array.length > 0) {
-                for (let i = 0; i < array.length; i++) {
-                    if (seatId === array[i]) countSelected++;
+            if (arrayGlobalId.length > 0) {
+                for (let i = 0; i < arrayGlobalId.length; i++) {
+                    if (globalId === arrayGlobalId[i]) countSelected++;
                 }
                 if (countSelected === 0) {
-                    array.push(seatId);
-                    callback(array);
+                    arrayGlobalId.push(globalId);
+                    arrayLocalId.push(localId);
+                    callbackLocal(arrayLocalId);
+                    callbackGlobal(arrayGlobalId);
                 } 
             } else {
-                array.push(seatId);
-                callback(array);
+                arrayGlobalId.push(globalId);
+                callbackGlobal(arrayGlobalId);
+                arrayLocalId.push(localId);
+                callbackLocal(arrayLocalId);
             }
         } else {
-            for (let i = 0; i < array.length; i++) {
-                if (seatId === array[i]) {
-                    array.splice(i, 1);
-                    callback(array);
+            for (let i = 0; i < arrayGlobalId.length; i++) {
+                if (globalId === arrayGlobalId[i]) {
+                    arrayGlobalId.splice(i, 1);
+                    callbackGlobal(arrayGlobalId);
+                    arrayLocalId.splice(i, 1);
+                    callbackLocal(arrayLocalId);
                 }
             }
         }
@@ -38,7 +44,7 @@ export default function SeatSelection(props) {
     return (seats.map(seat => { 
         return (
         <Span key={seat.id} >
-            <Seat seat={seat} callback={(id, state) => selectSeat(id, state)} disp={seat.isAvailable}/>
+            <Seat seat={seat} callback={(globalId, state, localId) => selectSeat(globalId, state, localId)} disp={seat.isAvailable}/>
         </Span>
         )
         })

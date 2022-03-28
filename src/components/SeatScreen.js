@@ -22,8 +22,6 @@ function SeatScreen() {
     const [cpf, setCpf] = useState("");
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [selectedLocalSeats, setSelectedLocalSeats] = useState([]);
-    console.log(selectedSeats);
-    console.log(selectedLocalSeats);
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSession}/seats`);

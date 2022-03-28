@@ -22,6 +22,8 @@ function SeatScreen() {
     const [cpf, setCpf] = useState("");
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [selectedLocalSeats, setSelectedLocalSeats] = useState([]);
+    console.log(selectedSeats);
+    console.log(selectedLocalSeats);
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSession}/seats`);
@@ -31,6 +33,11 @@ function SeatScreen() {
             day: response.data.day,
             seats: response.data.seats,
             time: response.data.name});
+
+            setCpf('');
+            setName('');
+            setSelectedSeats([]);
+            setSelectedLocalSeats([]);
         });
 
         promise.catch(error => console.log(error));
@@ -50,7 +57,9 @@ function SeatScreen() {
                 name: name,
                 cpf: cpf
             });
-            promise.then(() => navigate('/success', {
+            promise.then(() => 
+            {  
+            navigate('/success', {
                 state: {
                     ids: [...selectedLocalSeats],
                     movie: session.movie.title,
@@ -59,7 +68,9 @@ function SeatScreen() {
                     name: name,
                     cpf: cpf
                 }
-            }))
+            });
+            }
+            )
         }
     }
 
@@ -68,8 +79,9 @@ function SeatScreen() {
             <main className="main">
                 <p>Selecione o(s) assento(s)</p>
                 <div className="main__seats">
-                    <SeatSelection seats={session.seats} callbackGlobal={(array) => setSelectedSeats([...array])} 
-                    callbackLocal={array => setSelectedLocalSeats([...array])}/>
+                    <SeatSelection seats={session.seats} callbackGlobal={ array => setSelectedSeats([...array])} 
+                    callbackLocal={array => setSelectedLocalSeats([...array])} selectedGlobalSeats={selectedSeats}
+                    selectedLocalSeats={selectedLocalSeats}/>
                 </div>
                 <SeatLabels />
                 <form onSubmit={verifyAndRequest}>

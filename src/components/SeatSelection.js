@@ -1,13 +1,17 @@
 import styled from 'styled-components';
+import {useState} from 'react';
 
 import Seat from './Seat';
 
-let arrayGlobalId = [];
-let arrayLocalId = [];
+// let arrayGlobalId = [];
+// let arrayLocalId = [];
 
 export default function SeatSelection(props) {
 
-    const {seats, callbackGlobal, callbackLocal} = props;
+    const [arrayGlobalId, setArrayGlobalId] = useState([]);
+    const [arrayLocalId, setArrayLocalId] = useState([]);
+
+    const {seats, callbackGlobal, callbackLocal, selectedGlobalSeats, selectedLocalSeats} = props;
     let countSelected = 0;
 
     function selectSeat(globalId, state, localId) {
@@ -18,24 +22,24 @@ export default function SeatSelection(props) {
                     if (globalId === arrayGlobalId[i]) countSelected++;
                 }
                 if (countSelected === 0) {
-                    arrayGlobalId.push(globalId);
-                    arrayLocalId.push(localId);
-                    callbackLocal(arrayLocalId);
-                    callbackGlobal(arrayGlobalId);
+                    setArrayGlobalId([...arrayGlobalId, globalId]);
+                    setArrayLocalId([...arrayLocalId, localId]);
+                    callbackLocal([...arrayLocalId, localId]);
+                    callbackGlobal([...arrayGlobalId, globalId]);
                 } 
             } else {
-                arrayGlobalId.push(globalId);
-                callbackGlobal(arrayGlobalId);
-                arrayLocalId.push(localId);
-                callbackLocal(arrayLocalId);
+                setArrayGlobalId([...arrayGlobalId, globalId]);
+                setArrayLocalId([...arrayLocalId, localId]);
+                callbackLocal([...arrayLocalId, localId]);
+                callbackGlobal([...arrayGlobalId, globalId]);
             }
         } else {
             for (let i = 0; i < arrayGlobalId.length; i++) {
                 if (globalId === arrayGlobalId[i]) {
                     arrayGlobalId.splice(i, 1);
-                    callbackGlobal(arrayGlobalId);
                     arrayLocalId.splice(i, 1);
                     callbackLocal(arrayLocalId);
+                    callbackGlobal(arrayGlobalId);
                 }
             }
         }
